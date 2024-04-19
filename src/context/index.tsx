@@ -41,7 +41,7 @@ export const ContextProvider = (props: any) => {
 
   const hasSelectedLaunches = useMemo(() => {
     return Object.keys(selectedLaunches).length > 0 || !isNull(totalEnergyConsumption);
-  }, [selectedLaunches]);
+  }, [selectedLaunches, totalEnergyConsumption]);
 
   const toggleLaunchSelection = useCallback((launch: Launch) => {
     setSelectedLaunches((currentSelections) => {
