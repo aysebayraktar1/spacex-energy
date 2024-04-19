@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import GlobalStyle from "./globalStyle";
 import { ApolloProvider } from "@apollo/client";
 import client from "./services/apollo-client";
+import { ContextProvider } from "./context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,8 +14,10 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
-      <GlobalStyle />
+      <ContextProvider>
+        <App />
+        <GlobalStyle />
+      </ContextProvider>
     </ApolloProvider>
   </React.StrictMode>
 );

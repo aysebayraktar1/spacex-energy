@@ -1,27 +1,32 @@
-import { FC } from "react";
+import { FC, useCallback, useMemo } from "react";
 import { Launch } from "../../../types/Launch";
 import Card from "../../../components/Card";
 import styled from "styled-components";
 import { formatDate } from "../../../helpers/dateHelpers";
 import { ArrowRightIcon, CalendarIcon } from "../../../icons/Icons";
+import { useApp } from "../../../context";
+import { isNullOrUndefined } from "../../../helpers/helper";
 
 type Props = {
   launch: Launch;
-  onSelect: (launch: Launch) => void;
 };
 
 const PLACEHOLDER_IMG =
   "https://farm3.staticflickr.com/2922/33578359423_4169ac8f98_o.jpg";
 
-const LaunchCard: FC<Props> = ({ launch, onSelect }) => {
-  const handleSelect = () => {
-    onSelect(launch);
-  };
+const LaunchCard: FC<Props> = ({ launch }) => {
+  const { toggleLaunchSelection, selectedLaunches } = useApp();
+
+  const isSelected = useMemo(() => !isNullOrUndefined(selectedLaunches[launch.id]), [launch, selectedLaunches]);
+
+  const handleSelect = useCallback(() => {
+    toggleLaunchSelection(launch);
+  }, [launch, toggleLaunchSelection]);
 
   return (
     <Container>
       <ButtonContainer>
-        <Button onClick={handleSelect}>Add Energy Consumption</Button>
+        <Button $isSelected={isSelected} onClick={handleSelect}>{isSelected ? 'Remove' : 'Add Energy Consumption' }</Button>
       </ButtonContainer>
       <Image
         src={launch.links.flickr_images[0] ?? PLACEHOLDER_IMG}
@@ -87,7 +92,7 @@ const Image = styled.img`
   border-radius: 10px 10px 0 0;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ $isSelected?: boolean; }>`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: none;
   border-radius: 10px;
@@ -95,6 +100,9 @@ const Button = styled.button`
   font-size: 14px;
   font-weight: 600;
   height: 30px;
+  background-color: ${props => props.$isSelected ? "white" : "#6a8cb0"};
+  color: ${props => props.$isSelected ? "#6a8cb0" : "white"};
+  cursor: pointer;
 `;
 
 const DateContainer = styled.div`
