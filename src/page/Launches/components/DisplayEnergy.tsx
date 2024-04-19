@@ -1,16 +1,18 @@
 import styled from "styled-components";
-import { useApp } from "../../../context";
+import { useLaunchManagement } from "../context/launches";
 
 const DisplayEnergy = () => {
-  const { selectedLaunches, totalEnergyConsumption } = useApp();
+  const { selectedLaunches, totalEnergyConsumption } =
+    useLaunchManagement();
+  
   return (
     <Container>
       <List>
         {/* TODO: Create type for selected launches */}
         {Object.values(selectedLaunches).map((launch: any) => (
-          <li key={launch.id}>
+          <ListItem key={launch.id}>
             {launch.mission_name} - {launch.rocket.rocket_name}
-          </li>
+          </ListItem>
         ))}
       </List>
       <TotalEnergyContainer>
@@ -34,7 +36,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   opacity: 0.9;
-  min-height: 100px;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+    flex-flow: column-reverse;
+  }
 `;
 
 const TotalEnergyContainer = styled.div`
@@ -42,12 +48,19 @@ const TotalEnergyContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   padding: 16px;
+  @media (max-width: 600px) {
+    align-items: center;
+  }
 `;
 
 const List = styled.ul`
   list-style: none;
+  padding-inline-start: 0;
 `;
 
+const ListItem = styled.li`
+  padding: 4px 16px;
+`;
 const Title = styled.h4`
   margin: 0;
 `;

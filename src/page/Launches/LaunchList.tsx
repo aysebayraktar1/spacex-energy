@@ -6,10 +6,13 @@ import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import LaunchCard from "./components/LaunchCard";
 import { useCallback } from "react";
 import Skeleton from "../../components/Skeleton";
+import DisplayEnergy from "./components/DisplayEnergy";
+import { useLaunchManagement } from "./context/launches";
 
 const PAGE_LIMIT = 12;
 
 const LaunchList = () => {
+  const { hasSelectedLaunches } = useLaunchManagement();
   const { data, loading, fetchMore, error } = useQuery(GET_LAUNCHES, {
     variables: { limit: PAGE_LIMIT, offset: 0 },
   });
@@ -53,10 +56,11 @@ const LaunchList = () => {
     <Container>
       <ListContainer>
         {data.launches.map((launch: Launch) => (
-          <LaunchCard key={launch.id} launch={launch} onSelect={() => {}} />
+          <LaunchCard key={launch.id} launch={launch} />
         ))}
       </ListContainer>
       {isFetching && <p>...</p>}
+      {hasSelectedLaunches && <DisplayEnergy />}
     </Container>
   );
 };
@@ -74,6 +78,7 @@ const ListContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
+  margin: 30px 0;
 `;
 
 export default LaunchList;

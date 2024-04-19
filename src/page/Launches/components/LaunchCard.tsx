@@ -4,8 +4,8 @@ import Card from "../../../components/Card";
 import styled from "styled-components";
 import { formatDate } from "../../../helpers/dateHelpers";
 import { ArrowRightIcon, CalendarIcon } from "../../../icons/Icons";
-import { useApp } from "../../../context";
 import { isNullOrUndefined } from "../../../helpers/helper";
+import { useLaunchManagement } from "../context/launches";
 
 type Props = {
   launch: Launch;
@@ -15,7 +15,7 @@ const PLACEHOLDER_IMG =
   "https://farm3.staticflickr.com/2922/33578359423_4169ac8f98_o.jpg";
 
 const LaunchCard: FC<Props> = ({ launch }) => {
-  const { toggleLaunchSelection, selectedLaunches } = useApp();
+  const { toggleLaunchSelection, selectedLaunches } = useLaunchManagement();
 
   const isSelected = useMemo(() => !isNullOrUndefined(selectedLaunches[launch.id]), [launch, selectedLaunches]);
 
