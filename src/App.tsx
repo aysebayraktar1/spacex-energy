@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import Header from "./components/Header";
 import LaunchManagement from "./page/Launches/LaunchManagement";
+import IntroText from "./page/Launches/components/IntroText";
 
 function App() {
   return (
     <Container>
       <Header />
+      <IntroText/>  
       <LaunchManagement />
     </Container>
   );
