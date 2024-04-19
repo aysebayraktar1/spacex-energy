@@ -2,6 +2,8 @@ import { FC } from "react";
 import { Launch } from "../../../types/Launch";
 import Card from "../../../components/Card";
 import styled from "styled-components";
+import { formatDate } from "../../../helpers/dateHelpers";
+import { Calendar } from "../../../icons/Icons";
 
 type Props = {
   launch: Launch;
@@ -17,24 +19,31 @@ const LaunchCard: FC<Props> = ({ launch, onSelect }) => {
   };
 
   return (
-    <CardContainer>
+    <Container>
       <ButtonContainer>
         <Button onClick={handleSelect}>Add Energy Consumption</Button>
       </ButtonContainer>
-      <CardImage
+      <Image
         src={launch.links.flickr_images[0] ?? PLACEHOLDER_IMG}
         alt={launch.mission_name}
       />
-      <CardContent>
-        <CardTitle>
-          {launch.mission_name} - {launch.rocket.rocket_name}
-        </CardTitle>
-      </CardContent>
-    </CardContainer>
+      <Content>
+        <TitleContainer>
+          <Title>
+            {launch.mission_name} - {launch.rocket.rocket_name}
+          </Title>
+          <DateContainer>
+            <Calendar />
+            <p>{formatDate(launch.launch_date_utc)}</p>
+          </DateContainer>
+        </TitleContainer>
+        <Description>{launch.mission_name}</Description>
+      </Content>
+    </Container>
   );
 };
 
-const CardContainer = styled(Card)`
+const Container = styled(Card)`
   position: relative;
   overflow: hidden;
   border-radius: 10px;
@@ -49,15 +58,15 @@ const ButtonContainer = styled.div`
   z-index: 1;
 `;
 
-const CardContent = styled.div`
-  padding: 10px;
+const Content = styled.div`
+  padding: 0 10px;
 `;
 
-const CardTitle = styled.h3`
+const Title = styled.h3`
   margin: 0;
 `;
 
-const CardImage = styled.img`
+const Image = styled.img`
   width: 100%;
   max-width: 100%;
   height: 200px;
@@ -72,6 +81,22 @@ const Button = styled.button`
   padding: 4px 10px;
   font-size: 14px;
   font-weight: 600;
+`;
+
+const DateContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Description = styled.p`
+  margin: 0;
 `;
 
 export default LaunchCard;
