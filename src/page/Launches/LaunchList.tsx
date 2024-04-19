@@ -26,18 +26,14 @@ const LaunchList = () => {
           offset: data.launches.length,
         },
       });
-    } 
+    }
   }, [fetchMore, data]);
 
   const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreLaunches);
 
   if (loading) {
     return (
-      <ListContainer
-        style={{
-          maxWidth: "1440px",
-        }}
-      >
+      <ListContainer>
         {Array.from(new Array(PAGE_LIMIT)).map((_, index) => (
           <Skeleton
             key={index}
@@ -76,7 +72,6 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  max-width: 1440px;
 `;
 
 const ListContainer = styled.div`
