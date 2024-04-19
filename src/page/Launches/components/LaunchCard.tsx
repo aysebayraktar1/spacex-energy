@@ -35,7 +35,7 @@ const LaunchCard: FC<Props> = ({ launch }) => {
       <Content>
         <TitleContainer>
           <Title>
-            {launch.mission_name} - {launch.rocket.rocket_name}
+            {launch.mission_name} 
           </Title>
           <DateContainer>
             <CalendarIcon />
@@ -43,7 +43,7 @@ const LaunchCard: FC<Props> = ({ launch }) => {
           </DateContainer>
         </TitleContainer>
         <TitleContainer>
-          <Description>{launch.mission_name}</Description>
+          <Text>{launch.rocket.rocket_name}</Text>
           <Link
             href={launch.links.video_link}
             target="_blank"
@@ -117,7 +117,7 @@ const TitleContainer = styled.div`
   align-items: center;
 `;
 
-const Description = styled.p`
+const Text = styled.p`
   margin: 0;
 `;
 

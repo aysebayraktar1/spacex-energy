@@ -5,7 +5,7 @@ import {
     useMemo,
     useState,
   } from "react";
-import energyCalculatorHelper from "../../../helpers/energyCalculatorHelper";
+import { calculateTotalEnergy} from "../../../helpers/energyCalculatorHelper";
 import { isNull } from "../../../helpers/helper";
 import { Launch } from "../../../types/Launch";
   
@@ -36,7 +36,7 @@ import { Launch } from "../../../types/Launch";
       if (Object.keys(selectedLaunches).length === 0) {
         return null;
       }
-      return energyCalculatorHelper(selectedLaunches);
+      return calculateTotalEnergy(selectedLaunches);
     }, [selectedLaunches]);
   
     const hasSelectedLaunches = useMemo(() => {

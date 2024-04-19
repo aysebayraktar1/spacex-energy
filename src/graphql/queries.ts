@@ -6,6 +6,7 @@ export const GET_LAUNCHES = gql`
       id
       launch_date_utc
       mission_name
+      launch_year
       rocket {
         rocket_name
         rocket {

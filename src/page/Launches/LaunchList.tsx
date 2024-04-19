@@ -8,6 +8,8 @@ import { useCallback } from "react";
 import Skeleton from "../../components/Skeleton";
 import DisplayEnergy from "./components/DisplayEnergy";
 import { useLaunchManagement } from "./context/launches";
+import LaunchesPerYearBarChart from "./graphs/LaunchesPerYearBarChart";
+import RocketDistributionPieChart from "./graphs/RocketDistributionPieChart";
 
 const PAGE_LIMIT = 12;
 
@@ -54,6 +56,10 @@ const LaunchList = () => {
 
   return (
     <Container>
+      <GraphsContainer>
+        <LaunchesPerYearBarChart launches={data.launches} />
+        <RocketDistributionPieChart launches={data.launches} />
+      </GraphsContainer>
       <ListContainer>
         {data.launches.map((launch: Launch) => (
           <LaunchCard key={launch.id} launch={launch} />
@@ -79,6 +85,16 @@ const ListContainer = styled.div`
   justify-content: center;
   gap: 20px;
   margin: 30px 0;
+`;
+
+const GraphsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+  width: 100%;
+  align-items: center;
 `;
 
 export default LaunchList;

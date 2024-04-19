@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useLaunchManagement } from "../context/launches";
+import { calculateLaunchEnergy } from "../../../helpers/energyCalculatorHelper";
 
 const DisplayEnergy = () => {
   const { selectedLaunches, totalEnergyConsumption } =
@@ -8,10 +9,9 @@ const DisplayEnergy = () => {
   return (
     <Container>
       <List>
-        {/* TODO: Create type for selected launches */}
         {Object.values(selectedLaunches).map((launch: any) => (
           <ListItem key={launch.id}>
-            {launch.mission_name} - {launch.rocket.rocket_name}
+            {launch.mission_name}: {calculateLaunchEnergy(launch)} kWh
           </ListItem>
         ))}
       </List>
