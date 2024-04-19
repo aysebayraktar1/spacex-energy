@@ -13,6 +13,7 @@ export interface LaunchRocket {
 
 export interface LaunchLinks {
   flickr_images: string[]
+  video_link: string
 }
 
 export interface Rocket {

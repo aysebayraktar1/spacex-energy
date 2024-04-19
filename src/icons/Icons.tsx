@@ -4,9 +4,10 @@ export type IconProps = {
   width?: string;
   height?: string;
   color?: string;
+  style?: React.CSSProperties;
 };
 
-export const Calendar: FC<IconProps> = ({ width = "18", height = "16", color = 'black' }) => {
+export const CalendarIcon: FC<IconProps> = ({ width = "18", height = "16", color = 'black' }) => {
   return (
     <svg
       width={width}
@@ -22,3 +23,12 @@ export const Calendar: FC<IconProps> = ({ width = "18", height = "16", color = '
     </svg>
   );
 };
+
+
+export const ArrowRightIcon: FC<IconProps> = ({ width = "15", height = "12", color = 'black', style}) => {
+  return (
+      <svg width={width} height={height} style={style} viewBox="0 0 15 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.5312 6.14844C14.5312 6.39062 14.4297 6.63281 14.2578 6.79688L9.39062 11.6562C9.20312 11.8359 8.99219 11.9219 8.77344 11.9219C8.27344 11.9219 7.91406 11.5703 7.91406 11.0938C7.91406 10.8438 8.01562 10.625 8.17969 10.4688L9.82812 8.79688L11.8828 6.92969L10.1797 7.02344H1.35156C0.820312 7.02344 0.460938 6.67188 0.460938 6.14844C0.460938 5.63281 0.820312 5.28125 1.35156 5.28125H10.1797L11.875 5.375L9.82812 3.50781L8.17969 1.83594C8.01562 1.67188 7.91406 1.46094 7.91406 1.21094C7.91406 0.734375 8.27344 0.375 8.77344 0.375C8.99219 0.375 9.21094 0.46875 9.40625 0.65625L14.2578 5.50781C14.4297 5.67188 14.5312 5.91406 14.5312 6.14844Z" fill={color} />
+      </svg>
+  )
+}

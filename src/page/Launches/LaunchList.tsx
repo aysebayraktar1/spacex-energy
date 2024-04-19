@@ -5,6 +5,7 @@ import styled from "styled-components";
 import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import LaunchCard from "./components/LaunchCard";
 import { useCallback } from "react";
+import Skeleton from "../../components/Skeleton";
 
 const PAGE_LIMIT = 12;
 
@@ -14,29 +15,59 @@ const LaunchList = () => {
   });
 
   const loadMoreLaunches = useCallback(() => {
-    fetchMore({
-      variables: {
-        offset: data?.launches.length,
-      },
-    });
-  }, [fetchMore, data?.launches.length]);
+    if (data && data.launches.length >= PAGE_LIMIT) {
+      return fetchMore({
+        variables: {
+          offset: data.launches.length,
+        },
+      });
+    } 
+  }, [fetchMore, data]);
 
   const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreLaunches);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) {
+    return (
+      <ListContainer
+        style={{
+          maxWidth: "1440px",
+        }}
+      >
+        {Array.from(new Array(PAGE_LIMIT)).map((_, index) => (
+          <Skeleton
+            key={index}
+            style={{
+              width: "400px",
+              height: "300px",
+              borderRadius: "10px",
+            }}
+          />
+        ))}
+      </ListContainer>
+    );
+  }
+
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div>
+    <Container>
       <ListContainer>
         {data.launches.map((launch: Launch) => (
           <LaunchCard key={launch.id} launch={launch} onSelect={() => {}} />
         ))}
       </ListContainer>
       {isFetching && <p>...</p>}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  max-width: 1440px;
+`;
 
 const ListContainer = styled.div`
   display: flex;

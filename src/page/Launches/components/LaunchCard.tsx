@@ -3,7 +3,7 @@ import { Launch } from "../../../types/Launch";
 import Card from "../../../components/Card";
 import styled from "styled-components";
 import { formatDate } from "../../../helpers/dateHelpers";
-import { Calendar } from "../../../icons/Icons";
+import { ArrowRightIcon, CalendarIcon } from "../../../icons/Icons";
 
 type Props = {
   launch: Launch;
@@ -33,11 +33,24 @@ const LaunchCard: FC<Props> = ({ launch, onSelect }) => {
             {launch.mission_name} - {launch.rocket.rocket_name}
           </Title>
           <DateContainer>
-            <Calendar />
+            <CalendarIcon />
             <p>{formatDate(launch.launch_date_utc)}</p>
           </DateContainer>
         </TitleContainer>
-        <Description>{launch.mission_name}</Description>
+        <TitleContainer>
+          <Description>{launch.mission_name}</Description>
+          <Link
+            href={launch.links.video_link}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ArrowRightIcon
+              style={{
+                rotate: "-45deg",
+              }}
+            />
+          </Link>
+        </TitleContainer>
       </Content>
     </Container>
   );
@@ -81,6 +94,7 @@ const Button = styled.button`
   padding: 4px 10px;
   font-size: 14px;
   font-weight: 600;
+  height: 30px;
 `;
 
 const DateContainer = styled.div`
@@ -97,6 +111,15 @@ const TitleContainer = styled.div`
 
 const Description = styled.p`
   margin: 0;
+`;
+
+const Link = styled.a`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default LaunchCard;

@@ -16,6 +16,7 @@ export const GET_LAUNCHES = gql`
       }
       links {
         flickr_images
+        video_link
       }
     }
   }
