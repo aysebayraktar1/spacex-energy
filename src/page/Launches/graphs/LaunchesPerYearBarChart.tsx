@@ -23,7 +23,7 @@ const LaunchesPerYearBarChart: React.FC<Props> = ({ launches }) => {
       year,
       launches: launchesPerYear[year],
     }));
-  }, [launches, launchesPerYear]);
+  }, [launchesPerYear]);
 
 
   return (

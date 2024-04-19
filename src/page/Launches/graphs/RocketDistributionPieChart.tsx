@@ -16,7 +16,7 @@ const RocketDistributionPieChart: React.FC<Props> = ({ launches }) => {
       name,
       value: rocketDistribution[name],
     }));
-  }, [rocketDistribution, launches]);
+  }, [rocketDistribution]);
 
   return (
     <PieChart width={400} height={400}>
