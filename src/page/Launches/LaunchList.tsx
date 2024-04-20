@@ -2,9 +2,8 @@ import { GET_LAUNCHES } from "../../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { Launch } from "../../types/Launch";
 import styled from "styled-components";
-import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 import LaunchCard from "./components/LaunchCard";
-import { useCallback } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Skeleton from "../../components/Skeleton";
 import DisplayEnergy from "./components/DisplayEnergy";
 import { useLaunchManagement } from "./context/launches";
@@ -19,17 +18,27 @@ const LaunchList = () => {
     variables: { limit: PAGE_LIMIT, offset: 0 },
   });
 
-  const loadMoreLaunches = useCallback(() => {
-    if (data && data.launches.length >= PAGE_LIMIT) {
-      return fetchMore({
+  const hasMore = useMemo(() => {
+    return data?.launches.length % PAGE_LIMIT === 0;
+  }, [data]);
+
+  const [loadingMore, setLoadingMore] = useState<boolean>(false);
+
+  const loadMoreLaunches = useCallback(async () => {
+    if (!hasMore) return;
+    try {
+      setLoadingMore(true);
+      await fetchMore({
         variables: {
-          offset: data.launches.length,
+          offset: data.launches?.length,
         },
       });
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoadingMore(false);
     }
   }, [fetchMore, data]);
-
-  const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreLaunches);
 
   if (loading) {
     return (
@@ -61,7 +70,11 @@ const LaunchList = () => {
           <LaunchCard key={launch.id} launch={launch} />
         ))}
       </ListContainer>
-      {isFetching && <p>...</p>}
+      {hasMore && (
+        <LoadMoreButton onClick={loadMoreLaunches}>
+          {loadingMore ? "Loading..." : "See More"}
+        </LoadMoreButton>
+      )}
       {hasSelectedLaunches && <DisplayEnergy />}
     </Container>
   );
@@ -90,6 +103,22 @@ const GraphsContainer = styled.div`
   margin: 30px 0;
   width: 100%;
   align-items: center;
+`;
+
+const LoadMoreButton = styled.button`
+  padding: 10px 20px;
+  background-color: #1f1f1f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px 0;
+  font-size: 16px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #333;
+  }
 `;
 
 export default LaunchList;
