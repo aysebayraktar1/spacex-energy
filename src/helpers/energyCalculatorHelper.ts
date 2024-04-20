@@ -13,7 +13,9 @@ export const calculateLaunchEnergy = (launch: Launch | undefined): number => {
   const massKg = launch.rocket.rocket.mass.kg;
   const fuelMass = massKg * KG_OF_FUEL_PER_KG_OF_MASS;
   const launchEnergy = (massKg + fuelMass) * ENERGY_PER_KG;
-  return launchEnergy;
+  const energyInKWh = launchEnergy / JOULES_TO_KWH;
+  return energyInKWh;
+  
 }
 
 export const calculateTotalEnergy = (selectedLaunches: SelectedLaunches): string => {
@@ -26,7 +28,7 @@ export const calculateTotalEnergy = (selectedLaunches: SelectedLaunches): string
     return totalEnergy + launchEnergy;
   }, 0);
 
-  const totalEnergyInKWh = totalEnergyInJoules / JOULES_TO_KWH;
-  return totalEnergyInKWh.toFixed(2);
+
+  return totalEnergyInJoules.toFixed(2);
 };
 

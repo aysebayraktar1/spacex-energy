@@ -38,7 +38,7 @@ const LaunchList = () => {
     } finally {
       setLoadingMore(false);
     }
-  }, [fetchMore, data]);
+  }, [fetchMore, data, hasMore]);
 
   if (loading) {
     return (
