@@ -2,11 +2,16 @@
 
 This project provides a visual interface to track SpaceX launches. Users can view a list of launches, select specific launches to track their total energy consumption.
 
+# Demo
+
+[SpaceX Energy Consumption](https://spacex-energy-aki5hdlik-aysebayraktar1s-projects.vercel.app/)
+
 ## Features
 
 - **Launch List**: View a list of recent SpaceX launches.(https://spacex-production.up.railway.app/)
-- **Select Launches**: Add or remove launches from the selection to track.
+- **Select Launches**: Add or remove launches from the selection to see energy consumption.
 - **Calculate Total Energy**: Calculate the total energy consumption based on selected launches.
+- **Data Visualization**: Two graphic views: Launches per year and Rocket Distribution
 
 ## Technologies and Systems Used In This Project
 
