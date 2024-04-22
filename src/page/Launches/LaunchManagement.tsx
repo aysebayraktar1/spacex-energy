@@ -1,7 +1,7 @@
 import LaunchList from './LaunchList';
 import LaunchesProvider from './context/launches';
 
-const LocalizationManagement = () => {
+const LaunchesManagement = () => {
     return (
         <LaunchesProvider>
             <LaunchList />
@@ -9,4 +9,4 @@ const LocalizationManagement = () => {
     )
 }
 
-export default LocalizationManagement
+export default LaunchesManagement
