@@ -2,7 +2,7 @@ import { GET_LAUNCHES } from "../../graphql/queries";
 import { useQuery } from "@apollo/client";
 import { Launch } from "../../types/Launch";
 import styled from "styled-components";
-import LaunchCard from "./components/LaunchCard";
+import LaunchCard from "./components/LaunchCard/LaunchCard";
 import { useCallback, useMemo, useState } from "react";
 import Skeleton from "../../components/Skeleton";
 import DisplayEnergy from "./components/DisplayEnergy";

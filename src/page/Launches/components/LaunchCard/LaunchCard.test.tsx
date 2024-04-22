@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import LaunchCard from "./LaunchCard";
-import { Launch } from "../../../types/Launch";
+import { Launch } from "../../../../types/Launch";
 
 const sampleLaunch: Launch = {
   id: '1',

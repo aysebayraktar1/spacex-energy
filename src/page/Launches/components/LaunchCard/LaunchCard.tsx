@@ -1,11 +1,11 @@
 import { FC, useCallback, useMemo } from "react";
-import { Launch } from "../../../types/Launch";
-import Card from "../../../components/Card";
+import { Launch } from "../../../../types/Launch";
+import Card from "../../../../components/Card";
 import styled from "styled-components";
-import { formatDate } from "../../../helpers/dateHelpers";
-import { ArrowRightIcon, CalendarIcon } from "../../../icons/Icons";
-import { isNullOrUndefined } from "../../../helpers/helper";
-import { useLaunchManagement } from "../context/launches";
+import { formatDate } from "../../../../helpers/dateHelpers";
+import { ArrowRightIcon, CalendarIcon } from "../../../../icons/Icons";
+import { isNullOrUndefined } from "../../../../helpers/helper";
+import { useLaunchManagement } from "../../context/launches";
 
 type Props = {
   launch: Launch;
